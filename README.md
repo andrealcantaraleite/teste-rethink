@@ -8,8 +8,8 @@ Para executar a suíte de testes em seu ambiente local, siga os passos abaixo:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <url-do-seu-repositorio-github>
-    cd <nome-do-repositorio>
+    git clone https://github.com/andrealcantaraleite/teste-rethink.git
+    cd teste-rethink
     ```
 
 2.  **Instale as dependências necessárias:**
