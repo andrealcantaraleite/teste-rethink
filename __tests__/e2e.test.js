@@ -1,22 +1,3 @@
-/**
- * Testes End-to-End para a API Rethink Bank
- * Framework: Jest
- * Cliente HTTP: Axios
- * * Para executar este teste:
- * 1. Instale as dependências:
- * npm install --save-dev jest axios @babel/core @babel/preset-env
- * * 2. Configure o package.json:
- * "scripts": {
- * "test": "jest"
- * }
- * * 3. Crie um arquivo babel.config.js na raiz do projeto:
- * module.exports = {
- * presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
- * };
- * * 4. Execute os testes com:
- * npm test
- */
-
 import axios from 'axios';
 
 // Configuração base do Axios para a API
@@ -46,7 +27,6 @@ describe('Jornada do Usuário - Rethink Bank E2E', () => {
 
   // Bloco executado antes de todos os testes para gerar os dados dos usuários
   beforeAll(() => {
-    // CORREÇÃO: Garantindo que os e-mails sejam únicos para evitar a falha no cadastro do destinatário.
     const userEmail = generateUniqueEmail();
     const recipientEmail = `recipient.${userEmail}`;
 
@@ -81,7 +61,7 @@ describe('Jornada do Usuário - Rethink Bank E2E', () => {
     confirmToken = response.data.confirmToken;
   });
 
-  // Teste 2: Cadastro do usuário destinatário (necessário para o teste de envio)
+  // Teste 2: Cadastro do usuário destinatário
   test('2. Deve cadastrar um usuário destinatário para o teste de envio', async () => {
     const response = await api.post('/cadastro', {
       cpf: recipientData.cpf,
@@ -174,7 +154,7 @@ describe('Jornada do Usuário - Rethink Bank E2E', () => {
   test('8. Deve marcar a conta como deletada', async () => {
     const response = await api.delete('/account', {
       headers: { Authorization: `Bearer ${sessionToken}` },
-      data: { password: userData.password }, // O Axios exige que o body do DELETE esteja em 'data'
+      data: { password: userData.password }, 
     });
 
     console.log('Resposta Excluir Conta:', response.data);
